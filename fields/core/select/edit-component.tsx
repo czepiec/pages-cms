@@ -9,6 +9,15 @@ import AsyncCreatableSelect from "react-select/async-creatable";
 import { ChevronDown, X } from "lucide-react";
 import { safeAccess, interpolate } from "@/lib/schema";
 
+// ADDED: A specific type for a select option.
+// REASON: This makes the component more type-safe and allows us to explicitly
+// type the `useState` hook, which fixes the TypeScript error.
+type SelectOption = {
+  value: any;
+  label: string;
+  image?: string;
+};
+
 const Option = ({ children, ...props }: any) => {
   const { data } = props;
   return (
@@ -144,7 +153,7 @@ const EditComponent = forwardRef((props: any, ref: any) => {
   // REASON: The original logic incorrectly created a label from the value itself.
   // The state is now initialized to `null` and will be populated by the new `useEffect` hook below,
   // which can correctly fetch or find the full option object.
-  const [selectedOptions, setSelectedOptions] = useState();
+  const [selectedOptions, setSelectedOptions] = useState<SelectOption | SelectOption[] | null>(null);
 
   // ADDED: New `useEffect` to resolve the initial `value` into a full `selectedOptions` object.
   // REASON: This is the core of the fix. It runs when the component loads or `value` changes.
