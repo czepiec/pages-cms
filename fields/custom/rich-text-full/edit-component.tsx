@@ -253,22 +253,26 @@ const EditComponent = forwardRef((props: any, ref) => {
                   <Heading2 className="h-4 w-4" />
                   Heading 2
                 </DropdownMenuItem>*/}
-                <DropdownMenuItem onClick={() => editor.chain().focus().setNode("heading", { level: 3 }).run()} className="gap-x-1.5">
-                  <Heading3 className="h-4 w-4" />
-                  Heading 3
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => editor.chain().focus().toggleBulletList().run()} className="gap-x-1.5">
-                  <List className="h-4 w-4" />
-                  Bulleted list
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => editor.chain().focus().toggleOrderedList().run()} className="gap-x-1.5">
-                  <ListOrdered className="h-4 w-4" />
-                  Numbered list
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => editor.chain().focus().setParagraph().toggleBlockquote().run()} className="gap-x-1.5">
-                  <Quote className="h-4 w-4" />
-                  Quote
-                </DropdownMenuItem>
+                {!editor.isActive("table") &&
+                  <>
+                    <DropdownMenuItem onClick={() => editor.chain().focus().setNode("heading", { level: 3 }).run()} className="gap-x-1.5">
+                      <Heading3 className="h-4 w-4" />
+                      Heading 3
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => editor.chain().focus().toggleBulletList().run()} className="gap-x-1.5">
+                      <List className="h-4 w-4" />
+                      Bulleted list
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => editor.chain().focus().toggleOrderedList().run()} className="gap-x-1.5">
+                      <ListOrdered className="h-4 w-4" />
+                      Numbered list
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => editor.chain().focus().setParagraph().toggleBlockquote().run()} className="gap-x-1.5">
+                      <Quote className="h-4 w-4" />
+                      Quote
+                    </DropdownMenuItem>
+                  </>
+                }
                 {/*<DropdownMenuItem onClick={() => editor.chain().focus().toggleCodeBlock().run()} className="gap-x-1.5">
                   <Code className="h-4 w-4" />
                   Code

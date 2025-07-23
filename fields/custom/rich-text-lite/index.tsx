@@ -46,7 +46,22 @@ const write = (value: any, field: Field, config: Record<string, any>) => {
       headingStyle: "atx",
       codeBlockStyle: "fenced"
     });
-    turndownService.use([tables, strikethrough]);
+    turndownService.use([tables]);
+
+    turndownService.addRule('underline', {
+      filter: ['u'],
+      replacement: function (content) {
+        return '<u>' + content + '</u>'
+      }
+    });
+
+    turndownService.addRule('strikethrough', {
+      filter: ['del', 's'],
+      replacement: function (content) {
+        return '~~' + content + '~~';
+      }
+    });
+
     turndownService.addRule("retain-html", {
       filter: (node: any, options: any) => (
         (
