@@ -77,7 +77,7 @@ const write = (value: any, field: Field, config: Record<string, any>) => {
     // We need to strip <colgroup> and <col> tags otherwise turndown won't convert tables
     content = content.replace(/<colgroup>.*?<\/colgroup>/g, '');
 
-    content = turndownService.turndown(content);
+    content = turndownService.turndown(content).replace(/^(\s*)(\d{2,}\.)  (.*)/gm, '$1$2 $3');
   }
 
   return content;
